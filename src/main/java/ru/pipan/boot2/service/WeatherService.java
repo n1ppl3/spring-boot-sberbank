@@ -8,8 +8,6 @@ import ru.pipan.boot2.client.OpenWeatherMapClient;
 import ru.pipan.boot2.entity.CacheRecord;
 import ru.pipan.boot2.repository.CacheRecordRepository;
 
-import java.util.Optional;
-
 @Slf4j
 @Service
 @AllArgsConstructor
@@ -20,10 +18,10 @@ public class WeatherService {
 
 	@Transactional
 	public Double getCityTemperature(String cityName) {
-		Optional<CacheRecord> recordInDb = cacheRecordRepository.findByCityName(cityName);
-		if (recordInDb.isPresent()) {
+		CacheRecord recordInDb = cacheRecordRepository.findByCityName(cityName);
+		if (recordInDb != null) {
 			logger.info("Found '{}' in DB!", cityName);
-			return recordInDb.get().getTemperature();
+			return recordInDb.getTemperature();
 		}
 		Double result = openWeatherMapClient.getCityTemperature(cityName);
 		cacheRecordRepository.save(new CacheRecord(cityName, result));

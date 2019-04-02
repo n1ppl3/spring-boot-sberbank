@@ -19,12 +19,13 @@ public class CacheRecord {
 	private Long id;
 	private String cityName;
 	private Double temperature;
-	private ZonedDateTime creationTime;
+	/* может пригодиться, если мы потом решим считать записи валидными только какое-то время */
+	private ZonedDateTime measureDateTime;
 
 	public CacheRecord(String cityName, Double temperature) {
 		this.cityName = cityName;
 		this.temperature = temperature;
-		this.creationTime = ZonedDateTime.now();
+		this.measureDateTime = ZonedDateTime.now();
 	}
 
 }

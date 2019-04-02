@@ -11,8 +11,8 @@ import ru.pipan.boot2.repository.CacheRecordRepository;
 
 @Configuration
 @EntityScan(basePackageClasses = {CacheRecord.class})
-@Import({DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
 @EnableJpaRepositories(basePackageClasses = {CacheRecordRepository.class})
+@Import({DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
 public class DataJpaConfiguration {
 
 }
