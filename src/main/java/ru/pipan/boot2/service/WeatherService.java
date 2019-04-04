@@ -2,6 +2,7 @@ package ru.pipan.boot2.service;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.pipan.boot2.client.OpenWeatherMapClient;
@@ -17,7 +18,8 @@ public class WeatherService {
 	private final CacheRecordRepository cacheRecordRepository;
 
 	@Transactional
-	public Double getCityTemperature(String cityName) {
+	public Double getCityTemperature(@NonNull String cityName) {
+		cityName = cityName.toLowerCase();
 		CacheRecord recordInDb = cacheRecordRepository.findByCityName(cityName);
 		if (recordInDb != null) {
 			logger.info("Found '{}' in DB!", cityName);
