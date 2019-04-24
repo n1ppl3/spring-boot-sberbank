@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import ru.pipan.boot2.service.WeatherService;
 
+import javax.annotation.PostConstruct;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 
@@ -16,13 +17,23 @@ import static java.util.concurrent.Executors.newFixedThreadPool;
 
 @Slf4j
 @RestController
-@AllArgsConstructor
 public class WeatherController {
 
 	private static final ExecutorService wcExecutor = newFixedThreadPool(10, new CustomizableThreadFactory("wc-pool-"));
 
 
 	private final WeatherService weatherService;
+
+	public WeatherController(WeatherService weatherService) {
+		this.weatherService = weatherService;
+		logger.warn("CONSTRUCTOR:    this.weatherService = {}; this.weatherService.getClass() = {}", this.weatherService, this.weatherService.getClass());
+	}
+
+
+	@PostConstruct
+	public void myPostConstruct() {
+		logger.warn("POST CONSTRUCT: this.weatherService = {}; this.weatherService.getClass() = {}", this.weatherService, this.weatherService.getClass());
+	}
 
 
 	@GetMapping("/temperature/{cityName}")
