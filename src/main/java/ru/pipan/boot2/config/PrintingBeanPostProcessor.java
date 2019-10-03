@@ -11,13 +11,17 @@ public class PrintingBeanPostProcessor implements BeanPostProcessor {
 
 	@Override
 	public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-		logger.warn("postProcessBeforeInitialization(): {}: {}", beanName, bean);
+		if (isOk(beanName)) logger.warn("BeforeInitialization(): {}: {}/{}", beanName, bean, bean.getClass().getCanonicalName());
 		return bean;
 	}
 
 	@Override
 	public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-		logger.warn("postProcessAfterInitialization() : {}: {}", beanName, bean);
+		if (isOk(beanName)) logger.warn("AfterInitialization() : {}: {}/{}", beanName, bean, bean.getClass().getCanonicalName());
 		return bean;
+	}
+
+	static boolean isOk(String beanName) {
+		return beanName.contains("weather");
 	}
 }
