@@ -48,7 +48,7 @@ public class WeatherController {
 
 	@Data
 	@AllArgsConstructor
-	public static class TemperatureResponse {
+	private static class TemperatureResponse {
 		private Double temperature;
 	}
 

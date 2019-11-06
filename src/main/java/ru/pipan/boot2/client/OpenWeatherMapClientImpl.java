@@ -37,7 +37,7 @@ public class OpenWeatherMapClientImpl implements OpenWeatherMapClient {
 	}
 
 
-	public WeatherResponse getWeatherByCityName(String cityName, String countryCode) {
+	private WeatherResponse getWeatherByCityName(String cityName, String countryCode) {
 		return restTemplate.getForEntity("/weather?q={cityName},{countryCode}&APPID={appId}&units=metric",
 			WeatherResponse.class, cityName, countryCode, appId)
 			.getBody();

@@ -21,7 +21,7 @@ public class PrintingBeanPostProcessor implements BeanPostProcessor {
 		return bean;
 	}
 
-	static boolean isOk(String beanName) {
+	private static boolean isOk(String beanName) {
 		return beanName.contains("weather");
 	}
 }

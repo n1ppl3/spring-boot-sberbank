@@ -39,7 +39,7 @@ public class OpenWeatherMapReactiveClient implements OpenWeatherMapClient {
 	}
 
 
-	public Mono<WeatherResponse> getWeatherByCityName(String cityName, String countryCode) {
+	private Mono<WeatherResponse> getWeatherByCityName(String cityName, String countryCode) {
 		return webClient.get().uri("/weather?q={cityName},{countryCode}&APPID={appId}&units=metric", cityName, countryCode, appId)
 			.retrieve()
 			.bodyToMono(WeatherResponse.class);
