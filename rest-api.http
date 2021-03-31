@@ -1,0 +1,8 @@
+### Send POST request with json body
+POST http://127.0.0.1:8181/simple/json/post
+Content-Type: application/json
+
+{
+  "id": 999,
+  "value": "content"
+}

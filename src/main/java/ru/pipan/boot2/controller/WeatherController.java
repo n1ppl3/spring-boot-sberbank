@@ -6,6 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.concurrent.CustomizableThreadFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import ru.pipan.boot2.service.WeatherService;
 
@@ -33,6 +35,20 @@ public class WeatherController {
 	@PostConstruct
 	public void myPostConstruct() {
 		logger.warn("POST CONSTRUCT: this.weatherService = {}; this.weatherService.getClass() = {}", this.weatherService, this.weatherService.getClass());
+	}
+
+
+	@PostMapping("/simple/json/post")
+	public IdValue simpleJsonPost(@RequestBody IdValue idValue) {
+		logger.info("/simple/json/post = {}", idValue);
+		return idValue;
+	}
+
+	@Data
+	@AllArgsConstructor
+	private static class IdValue {
+		private Integer id;
+		private String value;
 	}
 
 
