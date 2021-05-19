@@ -36,7 +36,7 @@ public class ApplicationTests {
 		Environment env = ctx.getEnvironment();
 		Boolean isVaultEnabled = env.getProperty("spring.cloud.vault.enabled", Boolean.class);
 		if (Boolean.TRUE.equals(isVaultEnabled)) {
-			// vault kv secret/fakebank bank-key=bank-value
+			// vault kv put secret/fakebank bank-key=bank-value
 			VaultTemplate vaultTemplate = ctx.getBean(VaultTemplate.class);
 			VaultKeyValueOperations vaultKeyValueOperations = vaultTemplate.opsForKeyValue("secret", VaultKeyValueOperationsSupport.KeyValueBackend.KV_2);
 			VaultResponse vaultResponse = vaultKeyValueOperations.get("fakebank");
